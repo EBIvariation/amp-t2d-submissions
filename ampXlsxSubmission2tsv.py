@@ -41,12 +41,6 @@ except NameError:
     print "Can not open xlsx file"
 
 
-#Worksheets in the xlsx file
-#print wb.get_sheet_names()
-#[u'Please Read First', u'Project_info', u'Project', u'Cohort_info', u'Cohort', u'RepeatedMeasures_info', u'RepeatedMeasures', u'Sample_info', u'Sample', u'Attribute Mapping_info', u'Attribute Mapping',
-#u'Analysis_info', u'Analysis', u'File_info ', u'File', u'Links_info', u'CVs']
-
-
 
 ######################################
 ###Build dict from worksheet:
