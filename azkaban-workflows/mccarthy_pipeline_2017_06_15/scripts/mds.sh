@@ -22,13 +22,13 @@ zcat 01.genome.genome.gz | sed 1d | sh $SCRIPT_DIR/clean_plink_report.sh | awk '
 
 #Now create a report that captures the overall number of pairs
 zcat 10.internal_only.pihat.gz | awk '
-	BEGIN{FS="\t"; OFS="\t"; for (i = 0; i < 10; i++) {a[i]=0}} 
+	BEGIN{FS="\t"; OFS="\t"; for (i = 0; i < 10; i++) {a[i]=0}}
 	{	x = int($3 * 10) / 1;
 		if (x == 10) x -= 1;
 		a[x] += 1;
 	}
 	END{for(i in a)print i"\t<"((i + 1) / 10)"\t"a[i];}' | sort -k 1,1 -n > 11.pihats.grouped
-	
+
 #Now do a report of those that are >= 0.9 (identical) and >= 0.4 (1st degree relation)
 zcat 10.internal_only.pihat.gz | awk 'BEGIN{FS="\t"; OFS="\t";} {if ($3 >= 0.9) print $0}' > 12.pihat.gte_0_9
 zcat 10.internal_only.pihat.gz | awk 'BEGIN{FS="\t"; OFS="\t";} {if ($3 >= 0.4) print $0}' > 12.pihat.gte_0_4
@@ -43,11 +43,11 @@ paste 13.pihat.gte_0_9.col1 13.pihat.gte_0_9.col2 > 14.pihat.gte_0_9.plus_imiss
 paste 13.pihat.gte_0_4.col1 13.pihat.gte_0_4.col2 > 14.pihat.gte_0_4.plus_imiss
 
 paste 14.pihat.gte_0_9.plus_imiss | sh $SCRIPT_DIR/clean_plink_report.sh | awk '
-	BEGIN{FS="\t"; OFS="\t";} 
+	BEGIN{FS="\t"; OFS="\t";}
 	{if ($3 <= $6) {print $1,$3,$4,$6} else {print $4,$6,$1,$3}}' > 15.pihat.gte_0_9.imiss_ordered
 
 paste 14.pihat.gte_0_4.plus_imiss | sh $SCRIPT_DIR/clean_plink_report.sh | awk '
-	BEGIN{FS="\t"; OFS="\t";} 
+	BEGIN{FS="\t"; OFS="\t";}
 	{if ($3 <= $6) {print $1,$3,$4,$6} else {print $4,$6,$1,$3}}' > 15.pihat.gte_0_4.imiss_ordered
 
 
