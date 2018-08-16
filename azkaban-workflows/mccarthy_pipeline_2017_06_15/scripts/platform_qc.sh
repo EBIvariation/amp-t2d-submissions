@@ -13,7 +13,7 @@ pushd $WORKSPACE
 #Throw out any indiv > 5% missing
 cat $RAW_MISSING_DIR/clean.imiss | awk 'BEGIN{FS="\t"; OFS="\t"} {if ($6 > 0.05) print $0}' | cut -f 1,2 | sed 1d > indiv.exclu
 
-#Throw out any marker == 0% call rate, which is 100 
+#Throw out any marker == 0% call rate, which is 100
 cat $RAW_MISSING_DIR/clean.lmiss | awk 'BEGIN{FS="\t"; OFS="\t"} {if ($5 == 1) print $0}' | cut -f 2 > marker.exclu
 
 plink --bfile $INPUT_STEM --remove indiv.exclu --exclude marker.exclu --make-bed --out plat_qc

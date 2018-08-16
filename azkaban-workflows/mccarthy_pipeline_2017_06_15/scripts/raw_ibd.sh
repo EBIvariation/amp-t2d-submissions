@@ -34,7 +34,7 @@ zcat 05.genome.genome.gz | sh $SCRIPT_DIR/clean_plink_report.sh | cut -f 2,4,10 
 
 #Now create a report that captures the overall number of pairs
 zcat 06.clean.ibd | awk '
-	BEGIN{FS="\t"; OFS="\t"; for (i = 0; i < 10; i++) {a[i]=0}} 
+	BEGIN{FS="\t"; OFS="\t"; for (i = 0; i < 10; i++) {a[i]=0}}
 	{	x = int($3 * 10) / 1;
 		if (x == 10) x -= 1;
 		a[x] += 1;
